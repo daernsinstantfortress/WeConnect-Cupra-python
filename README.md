@@ -2,11 +2,11 @@
 
 # WeConnect-Cupra-python
 [![GitHub sourcecode](https://img.shields.io/badge/Source-GitHub-green)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tillsteinbach/WeConnect-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/releases/latest)
-[![GitHub](https://img.shields.io/github/license/tillsteinbach/WeConnect-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/tillsteinbach/WeConnect-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/issues)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/weconnect?label=PyPI%20Downloads)](https://pypi.org/project/weconnect-cupra-daern/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/weconnect)](https://pypi.org/project/weconnect-cupra-daern/)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/daernsinstantfortress/WeConnect-Cupra-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/releases/latest)
+[![GitHub](https://img.shields.io/github/license/daernsinstantfortress/WeConnect-Cupra-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/daernsinstantfortress/WeConnect-Cupra-python)](https://github.com/daernsinstantfortress/WeConnect-Cupra-python/issues)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/weconnect-cupra-daern?label=PyPI%20Downloads)](https://pypi.org/project/weconnect-cupra-daern/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/weconnect-cupra-daern)](https://pypi.org/project/weconnect-cupra-daern/)
 
 Python API for the MyCupra Services. If you are not a developer and ended up here you probably want to check out a project using this library (see below).
 

@@ -1,0 +1,19 @@
+{
+  "vehicles": [
+    {
+      "vin": "VSSZZZK1XPP000000",
+      "enrollmentStatus": "completed",
+      "userRole": "primary",
+      "vehicleNickname": "CUPRA Born",
+      "specifications": {
+        "salesType": "K11B3C",
+        "colors": { "exterior": "2Y", "interior": "UC", "roof": "2Y" },
+        "wheels": { "rims": "C8I", "tires": "J50" },
+        "steeringRight": false,
+        "sunroof": false,
+        "heatedSeats": true,
+        "marketEntry": 3
+      }
+    }
+  ]
+}

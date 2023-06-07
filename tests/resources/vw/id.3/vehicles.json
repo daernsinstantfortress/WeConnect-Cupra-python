@@ -1,0 +1,96 @@
+{
+  "data": [
+    {
+      "vin": "WVWZZZE1ZNP000000",
+      "role": "PRIMARY_USER",
+      "userRoleStatus": "ENABLED",
+      "enrollmentStatus": "COMPLETED",
+      "brandCode": "V",
+      "model": "ID.3",
+      "nickname": "WVWZZZE1ZNP000000",
+      "capabilities": [
+        { "id": "webApp", "userDisablingAllowed": false },
+        {
+          "id": "automation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "charging",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "chargingProfiles",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "chargingStations",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "climatisation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "climatisationTimers",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "destinations",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "fuelStatus",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "ignition",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "mapUpdate",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "onlineSpeech",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "parkingInformation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        { "id": "readiness", "userDisablingAllowed": false },
+        {
+          "id": "routing",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "trafficInformation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "webRadio",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        }
+      ],
+      "images": {},
+      "coUsers": [],
+      "devicePlatform": "WCAR",
+      "tags": []
+    }
+  ]
+}

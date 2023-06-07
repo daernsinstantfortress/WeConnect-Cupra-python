@@ -1,0 +1,2 @@
+graft weconnect/api/vw/badges
+global-exclude *.pyc

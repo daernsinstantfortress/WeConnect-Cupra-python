@@ -1,0 +1,34 @@
+{
+  "engines": {
+    "primary": {
+      "type": "EV",
+      "fuelType": "EV",
+      "range": { "value": 250.0, "unit": "Km" },
+      "level": 78.0
+    },
+    "secondary": {
+      "type": null,
+      "fuelType": null,
+      "range": null,
+      "level": null
+    }
+  },
+  "measurements": { "mileageKm": 1471.0 },
+  "services": {
+    "charging": {
+      "status": "Charging",
+      "targetPct": 100,
+      "chargeMode": "manual",
+      "active": true,
+      "remainingTime": 355,
+      "progressBarPct": 78.0
+    },
+    "climatisation": {
+      "status": "Off",
+      "targetTemperatureKelvin": 295.15,
+      "active": false,
+      "remainingTime": 0,
+      "progressBarPct": 0.0
+    }
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "access": {
+    "accessStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "automation": {
+    "climatisationTimer": {
+      "value": {
+        "timers": [
+          {
+            "id": 1,
+            "enabled": false,
+            "singleTimer": { "startDateTime": "1999-12-31T23:00:00Z" }
+          },
+          {
+            "id": 2,
+            "enabled": false,
+            "singleTimer": { "startDateTime": "1999-12-31T23:00:00Z" }
+          }
+        ],
+        "carCapturedTimestamp": "2022-10-31T12:33:19.188Z",
+        "timeInCar": "2022-10-31T13:33:19+01:00"
+      }
+    },
+    "chargingProfiles": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:19.186Z",
+        "timeInCar": "2022-10-31T13:33:19+01:00",
+        "profiles": []
+      }
+    }
+  },
+  "userCapabilities": {
+    "capabilitiesStatus": {
+      "value": [
+        { "id": "webApp", "userDisablingAllowed": false },
+        {
+          "id": "automation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "charging",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "chargingProfiles",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "chargingStations",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "climatisation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "climatisationTimers",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "destinations",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "fuelStatus",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "ignition",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": false
+        },
+        {
+          "id": "mapUpdate",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "onlineSpeech",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "parkingInformation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        { "id": "readiness", "userDisablingAllowed": false },
+        {
+          "id": "routing",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "trafficInformation",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        },
+        {
+          "id": "webRadio",
+          "expirationDate": "2025-05-21T23:59:59Z",
+          "userDisablingAllowed": true
+        }
+      ]
+    }
+  },
+  "charging": {
+    "batteryStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:22Z",
+        "currentSOC_pct": 60,
+        "cruisingRangeElectric_km": 267
+      }
+    },
+    "chargingStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:22Z",
+        "remainingChargingTimeToComplete_min": 0,
+        "chargingState": "readyForCharging",
+        "chargeMode": "manual",
+        "chargePower_kW": 0,
+        "chargeRate_kmph": 0,
+        "chargeType": "invalid",
+        "chargingSettings": "default"
+      }
+    },
+    "chargingSettings": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:22Z",
+        "maxChargeCurrentAC": "maximum",
+        "autoUnlockPlugWhenCharged": "permanent",
+        "autoUnlockPlugWhenChargedAC": "permanent",
+        "targetSOC_pct": 80
+      }
+    },
+    "plugStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:34:05Z",
+        "plugConnectionState": "disconnected",
+        "plugLockState": "unlocked",
+        "externalPower": "unavailable",
+        "ledColor": "none"
+      }
+    },
+    "chargeMode": {
+      "value": {
+        "preferredChargeMode": "manual",
+        "availableChargeModes": ["invalid"]
+      }
+    }
+  },
+  "climatisation": {
+    "climatisationStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:24Z",
+        "remainingClimatisationTime_min": 0,
+        "climatisationState": "off"
+      }
+    },
+    "climatisationSettings": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:24Z",
+        "targetTemperature_C": 27,
+        "targetTemperature_F": 82,
+        "unitInCar": "celsius",
+        "climatizationAtUnlock": false,
+        "windowHeatingEnabled": false,
+        "zoneFrontLeftEnabled": false,
+        "zoneFrontRightEnabled": false
+      }
+    },
+    "windowHeatingStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:24Z",
+        "windowHeatingStatus": [
+          { "windowLocation": "front", "windowHeatingState": "off" },
+          { "windowLocation": "rear", "windowHeatingState": "off" }
+        ]
+      }
+    }
+  },
+  "fuelStatus": {
+    "rangeStatus": {
+      "value": {
+        "carCapturedTimestamp": "2022-10-31T12:33:22Z",
+        "carType": "electric",
+        "primaryEngine": {
+          "type": "electric",
+          "currentSOC_pct": 60,
+          "remainingRange_km": 267
+        },
+        "totalRange_km": 267
+      }
+    }
+  },
+  "vehicleLights": {
+    "lightsStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "vehicleHealthInspection": {
+    "maintenanceStatus": {
+      "value": {
+        "carCapturedTimestamp": "0001-01-01T00:00:00Z",
+        "mileage_km": 0
+      }
+    }
+  },
+  "lvBattery": {
+    "lvBatteryStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "oilLevel": {
+    "oilLevelStatus": {
+      "error": {
+        "message": "Bad Gateway",
+        "info": "Something went wrong. Please try to re-login. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4004,
+        "group": 3,
+        "retry": true
+      }
+    }
+  },
+  "measurements": {
+    "rangeStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    },
+    "odometerStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "batterySupport": {
+    "batterySupportStatus": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  },
+  "readiness": {
+    "readinessStatus": {
+      "value": {
+        "connectionState": {
+          "isOnline": true,
+          "isActive": false,
+          "batteryPowerLevel": "comfort",
+          "dailyPowerBudgetAvailable": true
+        },
+        "connectionWarning": {
+          "insufficientBatteryLevelWarning": false,
+          "dailyPowerBudgetWarning": false
+        }
+      }
+    }
+  },
+  "vehicleHealthWarnings": {
+    "warningLights": {
+      "error": {
+        "message": "Not Found",
+        "info": "Upstream service responded with an unexpected status. If the problem persists, please contact our support.",
+        "errorTimeStamp": "2022-10-31T13:00:09Z",
+        "code": 4112,
+        "group": 2,
+        "retry": true
+      }
+    }
+  }
+}

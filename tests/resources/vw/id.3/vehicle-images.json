@@ -1,0 +1,104 @@
+{
+  "data": [
+    {
+      "id": "door_left_back",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_left_back.0.1.0.png",
+      "fileName": "image_door_left_back.0.1.0.png"
+    },
+    {
+      "id": "door_left_front",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_left_front.0.1.0.png",
+      "fileName": "image_door_left_front.0.1.0.png"
+    },
+    {
+      "id": "window_left_back_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_window_left_back_overlay.0.1.0.png",
+      "fileName": "image_window_left_back_overlay.0.1.0.png"
+    },
+    {
+      "id": "door_right_back_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_right_back_overlay.0.1.0.png",
+      "fileName": "image_door_right_back_overlay.0.1.0.png"
+    },
+    {
+      "id": "car_birdview",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_car_birdview.0.1.0.png",
+      "fileName": "image_car_birdview.0.1.0.png"
+    },
+    {
+      "id": "door_left_back_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_left_back_overlay.0.1.0.png",
+      "fileName": "image_door_left_back_overlay.0.1.0.png"
+    },
+    {
+      "id": "door_left_front_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_left_front_overlay.0.1.0.png",
+      "fileName": "image_door_left_front_overlay.0.1.0.png"
+    },
+    {
+      "id": "window_left_front_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_window_left_front_overlay.0.1.0.png",
+      "fileName": "image_window_left_front_overlay.0.1.0.png"
+    },
+    {
+      "id": "window_right_front_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_window_right_front_overlay.0.1.0.png",
+      "fileName": "image_window_right_front_overlay.0.1.0.png"
+    },
+    {
+      "id": "door_right_back",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_right_back.0.1.0.png",
+      "fileName": "image_door_right_back.0.1.0.png"
+    },
+    {
+      "id": "door_right_front",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_right_front.0.1.0.png",
+      "fileName": "image_door_right_front.0.1.0.png"
+    },
+    {
+      "id": "door_right_front_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_door_right_front_overlay.0.1.0.png",
+      "fileName": "image_door_right_front_overlay.0.1.0.png"
+    },
+    {
+      "id": "light_left",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_light_left.0.1.0.png",
+      "fileName": "image_light_left.0.1.0.png"
+    },
+    {
+      "id": "light_right",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_light_right.0.1.0.png",
+      "fileName": "image_light_right.0.1.0.png"
+    },
+    {
+      "id": "sunroof",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_sunroof.png",
+      "fileName": "image_sunroof.png"
+    },
+    {
+      "id": "sunroof_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_sunroof_overlay.png",
+      "fileName": "image_sunroof_overlay.png"
+    },
+    {
+      "id": "trunk_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_trunk_overlay.0.1.0.png",
+      "fileName": "image_trunk_overlay.0.1.0.png"
+    },
+    {
+      "id": "bonnet_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_bonnet_overlay.0.1.0.png",
+      "fileName": "image_bonnet_overlay.0.1.0.png"
+    },
+    {
+      "id": "car_34view",
+      "url": "https://media.volkswagen.com/Vilma/V/E11/2022/Front_Right/a49a979bebc9f9caf7c8524bf6bd49633a28f1450e350f704f090c70a8342cd5.png?width=776",
+      "fileName": ""
+    },
+    {
+      "id": "window_right_back_overlay",
+      "url": "https://vehicle-images-service.apps.emea.vwapps.io/v2/image/id_3/2x/image_window_right_back_overlay.0.1.0.png",
+      "fileName": "image_window_right_back_overlay.0.1.0.png"
+    }
+  ]
+}

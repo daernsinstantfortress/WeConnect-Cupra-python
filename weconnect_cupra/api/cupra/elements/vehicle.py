@@ -22,6 +22,7 @@ from weconnect_cupra.api.cupra.elements.charging_status import ChargingStatus
 from weconnect_cupra.api.cupra.elements.helpers.request_tracker import RequestTracker
 from weconnect_cupra.api.cupra.elements.battery_status import BatteryStatus
 from weconnect_cupra.api.cupra.elements.access_status import AccessStatus
+from weconnect_cupra.api.cupra.elements.connection_status import ConnectionStatus
 
 
 LOG: logging.Logger = logging.getLogger("weconnect_cupra")
@@ -220,6 +221,8 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
             f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/climatisation/status')["data"]
         climatization_settings_dict = self.fetcher.fetchData(
             f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/climatisation/settings')['settings']
+        connection_dict = self.fetcher.fetchData(
+            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/connection')['connection']
 
 
         jobs = {
@@ -234,6 +237,9 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
                 'windowHeatingStatus': (WindowHeatingStatus, climatization_status_dict['windowHeatingStatus']),
                 'climatisationSettings': (ClimatizationSettings, climatization_settings_dict)
             },
+            Domain.STATUS: {
+                'connectionStatus': (ConnectionStatus, connection_dict)
+            }
           
         }
 

@@ -70,6 +70,11 @@ def main():
                 and vehicle.domains["access"]["accessStatus"].enabled:
                 print(vehicle.domains["access"]["accessStatus"])
 
+            if "status" in vehicle.domains \
+                and 'connectionStatus' in vehicle.domains["status"] \
+                and vehicle.domains["status"]["connectionStatus"].enabled:
+                print(vehicle.domains["status"]["connectionStatus"])
+
 
 
             # Maybe change charging state

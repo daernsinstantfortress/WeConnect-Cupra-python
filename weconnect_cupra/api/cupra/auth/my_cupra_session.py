@@ -18,8 +18,8 @@ from requests.models import CaseInsensitiveDict
 from weconnect_cupra.auth.openid_session import AccessType
 
 from weconnect_cupra.auth.vw_web_session import VWWebSession
-from weconnect_cupra.errors import APICompatibilityError, AuthentificationError, RetrievalError, TemporaryAuthentificationError
-
+from weconnect_cupra.errors import APICompatibilityError, AuthentificationError, RetrievalError, \
+    TemporaryAuthentificationError
 
 LOG = logging.getLogger("weconnect_cupra")
 
@@ -84,7 +84,7 @@ class MyCupraSession(VWWebSession):
 
         # Find login form on page to obtain inputs
         emailFormRegex = r'<form.+id=\"emailPasswordForm\".*action=\"(?P<formAction>[^\"]+)\"[^>]*>' \
-            r'(?P<formContent>.+?(?=</form>))</form>'
+                         r'(?P<formContent>.+?(?=</form>))</form>'
         match: Optional[Match[str]] = re.search(emailFormRegex, loginFormResponse.text, flags=re.DOTALL)
         if match is None:
             raise APICompatibilityError('No login email form found')
@@ -110,7 +110,8 @@ class MyCupraSession(VWWebSession):
         loginHeadersForm['Content-Type'] = 'application/x-www-form-urlencoded'
 
         # Post form content and retrieve credentials page
-        login2Response: requests.Response = websession.post(login2Url, headers=loginHeadersForm, data=formData, allow_redirects=True)
+        login2Response: requests.Response = websession.post(login2Url, headers=loginHeadersForm, data=formData,
+                                                            allow_redirects=True)
 
         if login2Response.status_code != requests.codes['ok']:  # pylint: disable=E1101
             if login2Response.status_code == requests.codes['internal_server_error']:
@@ -119,7 +120,7 @@ class MyCupraSession(VWWebSession):
                                         f' status code: {login2Response.status_code}')
 
         credentialsTemplateRegex = r'<script>\s+window\._IDK\s+=\s+\{\s' \
-            r'(?P<templateModel>.+?(?=\s+\};?\s+</script>))\s+\};?\s+</script>'
+                                   r'(?P<templateModel>.+?(?=\s+\};?\s+</script>))\s+\};?\s+</script>'
         match = re.search(credentialsTemplateRegex, login2Response.text, flags=re.DOTALL)
         if match is None:
             raise APICompatibilityError('No credentials form found')
@@ -142,8 +143,10 @@ class MyCupraSession(VWWebSession):
                         if templateModel['error'] == 'validator.email.invalid':
                             raise AuthentificationError('Error during login, email invalid')
                         raise AuthentificationError(f'Error during login: {templateModel["error"]}')
-                    if 'registerCredentialsPath' in templateModel and templateModel['registerCredentialsPath'] == 'register':
-                        raise AuthentificationError(f'Error during login, account {self.sessionuser.username} does not exist')
+                    if 'registerCredentialsPath' in templateModel and templateModel[
+                        'registerCredentialsPath'] == 'register':
+                        raise AuthentificationError(
+                            f'Error during login, account {self.sessionuser.username} does not exist')
                     if 'errorCode' in templateModel:
                         raise AuthentificationError('Error during login, is the username correct?')
                     if 'postAction' in templateModel:
@@ -159,7 +162,8 @@ class MyCupraSession(VWWebSession):
         login3Url = f'https://identity.vwgroup.io/signin-service/v1/{self.client_id}/{target}'
 
         # Post form content and retrieve userId in forwarding Location
-        login3Response: requests.Response = websession.post(login3Url, headers=loginHeadersForm, data=form2Data, allow_redirects=False)
+        login3Response: requests.Response = websession.post(login3Url, headers=loginHeadersForm, data=form2Data,
+                                                            allow_redirects=False)
         if login3Response.status_code not in (requests.codes['found'], requests.codes['see_other']):
             if login3Response.status_code == requests.codes['internal_server_error']:
                 raise RetrievalError('Temporary server error during login')
@@ -204,8 +208,9 @@ class MyCupraSession(VWWebSession):
 
             if 'Location' not in afterLoginResponse.headers:
                 if consentURL is not None:
-                    raise AuthentificationError('It seems like you need to accept the terms and conditions for the MyCupra service.'
-                                                f' Try to visit the URL "{consentURL}" or log into the MyCupra smartphone app')
+                    raise AuthentificationError(
+                        'It seems like you need to accept the terms and conditions for the MyCupra service.'
+                        f' Try to visit the URL "{consentURL}" or log into the MyCupra smartphone app')
                 raise APICompatibilityError('No Location for forwarding in response headers')
 
             afterLoginUrl = afterLoginResponse.headers['Location']
@@ -220,10 +225,10 @@ class MyCupraSession(VWWebSession):
         return queryurl
 
     def fetchTokens(
-        self,
-        token_url,
-        authorization_response=None,
-        **kwargs
+            self,
+            token_url,
+            authorization_response=None,
+            **kwargs
     ):
 
         self.parseFromFragment(authorization_response)
@@ -242,10 +247,12 @@ class MyCupraSession(VWWebSession):
             loginHeadersForm: CaseInsensitiveDict = self.headers
             loginHeadersForm['content-type'] = 'application/x-www-form-urlencoded; charset=utf-8'
 
-            tokenResponse = self.post(token_url, headers=loginHeadersForm, data=body, allow_redirects=False, access_type=AccessType.NONE)
+            tokenResponse = self.post(token_url, headers=loginHeadersForm, data=body, allow_redirects=False,
+                                      access_type=AccessType.NONE)
             if tokenResponse.status_code != requests.codes['ok']:
                 print(tokenResponse.text)
-                raise TemporaryAuthentificationError(f'Token could not be fetched due to temporary MyCupra failure: {tokenResponse.status_code}')
+                raise TemporaryAuthentificationError(
+                    f'Token could not be fetched due to temporary MyCupra failure: {tokenResponse.status_code}')
             token = self.parseFromBody(tokenResponse.text)
 
             return token
@@ -254,7 +261,8 @@ class MyCupraSession(VWWebSession):
         try:
             token = json.loads(token_response)
         except json.decoder.JSONDecodeError:
-            raise TemporaryAuthentificationError('Token could not be refreshed due to temporary MyCupra failure: json could not be decoded')
+            raise TemporaryAuthentificationError(
+                'Token could not be refreshed due to temporary MyCupra failure: json could not be decoded')
         if 'accessToken' in token:
             token['access_token'] = token.pop('accessToken')
         if 'idToken' in token:
@@ -265,15 +273,15 @@ class MyCupraSession(VWWebSession):
         return super(MyCupraSession, self).parseFromBody(token_response=fixedTokenresponse, state=state)
 
     def refreshTokens(
-        self,
-        token_url,
-        refresh_token=None,
-        auth=None,
-        timeout=None,
-        headers=None,
-        verify=True,
-        proxies=None,
-        **kwargs
+            self,
+            token_url,
+            refresh_token=None,
+            auth=None,
+            timeout=None,
+            headers=None,
+            verify=True,
+            proxies=None,
+            **kwargs
     ):
         LOG.info('Refreshing tokens')
         if not token_url:
@@ -309,8 +317,11 @@ class MyCupraSession(VWWebSession):
         )
         if tokenResponse.status_code == requests.codes['unauthorized']:
             raise AuthentificationError('Refreshing tokens failed: Server requests new authorization')
-        elif tokenResponse.status_code in (requests.codes['internal_server_error'], requests.codes['service_unavailable'], requests.codes['gateway_timeout']):
-            raise TemporaryAuthentificationError('Token could not be refreshed due to temporary MyCupra failure: {tokenResponse.status_code}')
+        elif tokenResponse.status_code in (
+                requests.codes['internal_server_error'], requests.codes['service_unavailable'],
+                requests.codes['gateway_timeout']):
+            raise TemporaryAuthentificationError(
+                'Token could not be refreshed due to temporary MyCupra failure: {tokenResponse.status_code}')
         elif tokenResponse.status_code == requests.codes['ok']:
             self.parseFromBody(tokenResponse.text)
             if "refresh_token" not in self.token:
@@ -321,16 +332,16 @@ class MyCupraSession(VWWebSession):
             raise RetrievalError(f'Status Code from MyCupra while refreshing tokens was: {tokenResponse.status_code}')
 
     def request(
-        self,
-        method,
-        url,
-        data=None,
-        headers=None,
-        withhold_token=False,
-        access_type=AccessType.ACCESS,
-        token=None,
-        timeout=None,
-        **kwargs
+            self,
+            method,
+            url,
+            data=None,
+            headers=None,
+            withhold_token=False,
+            access_type=AccessType.ACCESS,
+            token=None,
+            timeout=None,
+            **kwargs
     ):
         """Intercept all requests and add userId if present."""
         if not is_secure_transport(url):
@@ -339,9 +350,31 @@ class MyCupraSession(VWWebSession):
             headers = headers or {}
             headers['user-id'] = self.__userId
 
-        return super(MyCupraSession, self).request(method, url, headers=headers, data=data, withhold_token=withhold_token, access_type=access_type, token=token,
+        return super(MyCupraSession, self).request(method, url, headers=headers, data=data,
+                                                   withhold_token=withhold_token, access_type=access_type, token=token,
                                                    timeout=timeout, **kwargs)
+
+    def getUserinfo(self):
+        accessToken = self.token.get('access_token')
+        headers = {
+            "authorization": f"Bearer {accessToken}",
+            "user-agent": "CUPRAApp%20-%20Store/20230404 CFNetwork/1390 Darwin/22.0.0"
+        }
+        try:
+            userinfo_response = requests.get(url="https://identity-userinfo.vwgroup.io/oidc/userinfo", headers=headers)
+        except requests.exceptions.ConnectionError as e:
+            logging.error(f"Error fetching User Info: {e}")
+            return None
+
+        if userinfo_response.status_code == requests.codes['ok']:
+            return userinfo_response.json()
+        elif userinfo_response.status_code == requests.codes['unauthorized']:
+            raise Exception("Token has expired!")
 
     @property
     def user_id(self):
+        if not hasattr(self, "__userId"):
+            userinfo = self.getUserinfo()
+            if userinfo is not None:
+                self.__userId = userinfo.get("sub")
         return self.__userId

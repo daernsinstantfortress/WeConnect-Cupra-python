@@ -99,10 +99,8 @@ class WeConnect(AddressableObject):  # pylint: disable=too-many-instance-attribu
         #     self.__api = VwApi(weconnect_cupra=self, fetcher=self.__fetcher)
         self.__fetcher.base_url = self.__api.base_url
 
-        if updateAfterLogin and loginOnInit:
+        if updateAfterLogin:
             self.update(updateCapabilities=updateCapabilities, updatePictures=updatePictures, selective=selective)
-        elif updateAfterLogin and not loginOnInit:
-            LOG.warning("Not logged in, will not update automatically after init.")
 
 
     def __del__(self) -> None:

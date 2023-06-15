@@ -373,8 +373,10 @@ class MyCupraSession(VWWebSession):
 
     @property
     def user_id(self):
-        if not hasattr(self, "__userId"):
+        if not hasattr(self, "__userId") and self.token is not None:
             userinfo = self.getUserinfo()
             if userinfo is not None:
                 self.__userId = userinfo.get("sub")
+        elif self.token is None:
+            raise Exception("Token does not exist!")
         return self.__userId

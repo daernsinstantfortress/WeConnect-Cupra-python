@@ -39,7 +39,7 @@ def main():
         from weconnect_cupra.api.cupra.elements.enums import MaximumChargeCurrent, UnlockPlugState
     weConnect = weconnect_cupra.WeConnect(username=args.username, password=args.password,
         updateAfterLogin=False, loginOnInit=False,
-        service=service)
+        service=service, tokenfile='token.txt')
 
     print('#  Login')
     weConnect.login()

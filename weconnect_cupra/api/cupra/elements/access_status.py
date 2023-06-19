@@ -141,6 +141,8 @@ class AccessStatus(GenericStatus):
             string += f'\n\tLights: {self.lightsStatus.value.value}'
         if self.doorLockStatus is not None and self.doorLockStatus.enabled:
             string += f'\n\tDoor locks: {self.doorLockStatus.value.value}'
+        if self.overallStatus is not None and self.overallStatus.enabled:
+            string += f'\n\tOverall Status: {self.overallStatus.value.value}'
 
         return string
 

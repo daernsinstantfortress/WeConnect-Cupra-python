@@ -182,7 +182,7 @@ class AccessStatus(GenericStatus):
                         AccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
             else:
                 self.lockState.setValueWithCarTime(
-                    AAccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
+                    AccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
 
 
             if 'open' in fromDict:

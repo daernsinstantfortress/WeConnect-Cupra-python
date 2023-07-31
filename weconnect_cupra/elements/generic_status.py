@@ -125,6 +125,8 @@ class GenericStatus(AddressableObject):
         returnString: str = f'[{self.id}]'
         if self.carCapturedTimestamp.enabled and self.carCapturedTimestamp.value is not None:
             returnString += f' (last captured {self.carCapturedTimestamp.value.isoformat()})'
+            if self.carCapturedTimestamp.lastUpdateFromServer:
+                returnString += f' (last updated {self.carCapturedTimestamp.lastUpdateFromServer.isoformat()})'
         if self.error.enabled:
             returnString += '\n\tError: ' + ''.join(['\t' + line for line in str(self.error).splitlines(True)])
         for request in self.requests.values():

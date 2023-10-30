@@ -11,8 +11,19 @@ import logging
 
 import shutil
 
-from PIL import Image  # type: ignore
-import ascii_magic
+SUPPORT_IMAGES = False
+try:
+    from PIL import Image  # type: ignore
+    SUPPORT_IMAGES = True
+except ImportError:
+    pass
+
+SUPPORT_ASCII_IMAGES = False
+try:
+    import ascii_magic  # type: ignore
+    SUPPORT_ASCII_IMAGES = True
+except ImportError:
+    pass
 
 
 def robustTimeParse(timeString: str) -> datetime:
@@ -32,26 +43,36 @@ def toBool(value: Any) -> bool:
     raise ValueError('Not a valid boolean value (True/False)')
 
 
-def imgToASCIIArt(img: Image, columns: int = 0, mode: ascii_magic.Modes = ascii_magic.Modes.TERMINAL) -> str:
-    bbox = img.getbbox()
+if SUPPORT_ASCII_IMAGES:
+    class ASCIIModes(Enum):
+        TERMINAL = 'TERMINAL'
+        ASCII = 'ASCII'
+        HTML = 'HTML'
 
-    # Crop the image to the contents of the bounding box
-    image = img.crop(bbox)
+    def imgToASCIIArt(img: Image, columns: int = 0, mode=ASCIIModes.TERMINAL) -> str:
+        bbox = img.getbbox()
 
-    # Determine the width and height of the cropped image
-    (width, height) = image.size
+        # Crop the image to the contents of the bounding box
+        image = img.crop(bbox)
 
-    # Create a new image object for the output image
-    cropped_image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+        # Determine the width and height of the cropped image
+        (width, height) = image.size
 
-    # Paste the cropped image onto the new image
-    cropped_image.paste(image, (0, 0))
+        # Create a new image object for the output image
+        cropped_image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
 
-    if columns == 0:
-        columns = shutil.get_terminal_size()[0]
+        # Paste the cropped image onto the new image
+        cropped_image.paste(image, (0, 0))
 
-    return ascii_magic.from_image(cropped_image, columns=columns, mode=mode)
+        if columns == 0:
+            columns = shutil.get_terminal_size()[0]
 
+        if mode == ASCIIModes.ASCII:
+            return ascii_magic.from_pillow_image(cropped_image).to_ascii(columns=columns, monochrome=True)
+        if mode == ASCIIModes.HTML:
+            return ascii_magic.from_pillow_image(cropped_image).to_html(columns=columns)
+        return ascii_magic.from_pillow_image(cropped_image).to_ascii(columns=columns)
+    
 
 def celsiusToKelvin(value):
     return value + 273.15

@@ -276,7 +276,7 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
                     settings_key='odometerStatus')
 
                 status_dict = self.fetcher.fetchData(
-                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/status')
+                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vin.value}/status')
 
                 self.assign_properties_to_domain(
                     klass=AccessStatus,

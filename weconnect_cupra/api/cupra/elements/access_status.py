@@ -69,6 +69,18 @@ class AccessStatus(GenericStatus):
                     else:
                         self.doors[doorDict['name']] = AccessStatus.Door(fromDict=doorDict, parent=self.doors)
 
+            if 'hood' in fromDict['value']:
+                doorDict = fromDict['value']['hood']
+
+                if 'name' not in doorDict:
+                    doorDict['name'] = 'hood'
+
+                if 'name' in doorDict:
+                    if doorDict['name'] in self.doors:
+                        self.doors[doorDict['name']].update(fromDict=doorDict)
+                    else:
+                        self.doors[doorDict['name']] = AccessStatus.Door(fromDict=doorDict, parent=self.doors)
+
             if 'windows' in fromDict['value'] and fromDict['value']['windows'] is not None:
                 for windowName in fromDict['value']['windows']:
 
@@ -141,6 +153,8 @@ class AccessStatus(GenericStatus):
             string += f'\n\tLights: {self.lightsStatus.value.value}'
         if self.doorLockStatus is not None and self.doorLockStatus.enabled:
             string += f'\n\tDoor locks: {self.doorLockStatus.value.value}'
+        if self.overallStatus is not None and self.overallStatus.enabled:
+            string += f'\n\tOverall Status: {self.overallStatus.value.value}'
 
         return string
 
@@ -180,7 +194,7 @@ class AccessStatus(GenericStatus):
                         AccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
             else:
                 self.lockState.setValueWithCarTime(
-                    AAccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
+                    AccessControlState.LockState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
 
 
             if 'open' in fromDict:
@@ -196,6 +210,16 @@ class AccessStatus(GenericStatus):
             else:
                 self.openState.setValueWithCarTime(
                     AccessControlState.OpenState.UNKNOWN, lastUpdateFromCar=None, fromServer=True)
+
+            # Fudge because the Cupra Born always returns that the hood is unlocked, so we force it locked
+            if self.id == 'hood':
+                if self.openState.value == AccessControlState.OpenState.OPEN: 
+                    self.lockState.setValueWithCarTime(
+                        AccessControlState.LockState.UNLOCKED, lastUpdateFromCar=None, fromServer=True)
+                else:
+                    self.lockState.setValueWithCarTime(
+                        AccessControlState.LockState.LOCKED, lastUpdateFromCar=None, fromServer=True)
+
 
             for key, value in {key: value for key, value in fromDict.items() if key not in ['locked', 'open', 'name']}.items():
                 LOG.warning('%s: Unknown attribute %s with value %s', self.getGlobalAddress(), key, value)

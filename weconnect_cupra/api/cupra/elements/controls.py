@@ -114,7 +114,7 @@ class Controls(AddressableObject):
 
         # Do API request to set run state
         controlResponse = self.vehicle.fetcher.post(
-            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vehicle.vin.value}/climatisation/requests/{control.value}',
+            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vehicle.vin.value}/climatisation/requests/{control.value}',
             allow_redirects=True,
             headers={
                 "accept": '*/*',
@@ -156,7 +156,7 @@ class Controls(AddressableObject):
         
         # Do API request
         controlResponse = self.vehicle.fetcher.post(
-            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vehicle.vin.value}/charging/requests/{value.value}',
+            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vehicle.vin.value}/charging/requests/{value.value}',
             data='{}',
             allow_redirects=True,
             headers={

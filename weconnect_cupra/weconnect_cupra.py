@@ -88,6 +88,9 @@ class WeConnect(AddressableObject):  # pylint: disable=too-many-instance-attribu
 
         if loginOnInit:
             self.__session.login()
+        elif not loginOnInit and self.session.token is None:
+            LOG.warning("Token file is empty, triggering login.")
+            self.__session.login()
 
         # Construct the actual service adapter
         if service == Service.MY_CUPRA:

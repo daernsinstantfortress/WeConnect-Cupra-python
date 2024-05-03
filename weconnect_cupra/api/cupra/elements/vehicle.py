@@ -262,7 +262,8 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
                     domain_value=Domain.PARKING.value,
                     settings_key='parkingPosition')
             except:
-                LOG.warn('Failed to get parking position')
+                # This can fire when the vehicle is driving, so suppress it
+                LOG.debug('Failed to get parking position')
 
         if 'state' in self.capabilities and not self.capabilities['state'].status.value:
             try:

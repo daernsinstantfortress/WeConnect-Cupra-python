@@ -157,7 +157,6 @@ class Controls(AddressableObject):
         # Do API request
         controlResponse = self.vehicle.fetcher.post(
             url=f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vehicle.vin.value}/charging/requests/{value.value}',
-            data='{}',
             allow_redirects=True,
             headers={
                 "accept": '*/*',

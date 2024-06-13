@@ -41,7 +41,7 @@ class CupraApi:
 
     def updateVehicles(self, updateCapabilities: bool = True, updatePictures: bool = True, force: bool = False,  # noqa: C901
                        selective: Optional[list[Domain]] = None) -> None:
-        url = f'{self.base_url}/v1/users/{self.__fetcher.user_id}/garage/vehicles'
+        url = f'{self.base_url}/v2/users/{self.__fetcher.user_id}/garage/vehicles'
         data = self.__fetcher.fetchData(url, force)
         if data is not None and 'vehicles' in data and data['vehicles']:
             vins: List[str] = []

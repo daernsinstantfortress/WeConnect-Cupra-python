@@ -44,7 +44,7 @@ class ChargingStatus(GenericStatus):
             self.chargingState.fromDict(fromDict['value'], 'chargingState')
             self.chargeMode.fromDict(fromDict['value'], 'chargeMode')
             self.chargePower_kW.fromDict(fromDict['value'], 'chargePower_kW')
-            if 'chargePower_kW' in fromDict['value']:
+            if 'chargePower_kW' in fromDict['value'] and fromDict['value']['chargePower_kW'] is not None:
                 chargePower_kW = float(fromDict['value']['chargePower_kW'])
                 if self.fixAPI and chargePower_kW != 0 \
                         and self.chargingState.value in [ChargingStatus.ChargingState.OFF,
@@ -58,7 +58,7 @@ class ChargingStatus(GenericStatus):
                 self.chargePower_kW.setValueWithCarTime(chargePower_kW, lastUpdateFromCar=None, fromServer=True)
             else:
                 self.chargePower_kW.enabled = False
-            if 'chargeRate_kmph' in fromDict['value']:
+            if 'chargeRate_kmph' in fromDict['value'] and fromDict['value']['chargeRate_kmph'] is not None:
                 chargeRate_kmph = float(fromDict['value']['chargeRate_kmph'])
                 if self.fixAPI and chargeRate_kmph != 0 \
                         and self.chargingState.value in [ChargingStatus.ChargingState.OFF,

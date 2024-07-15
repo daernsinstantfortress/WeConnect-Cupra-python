@@ -34,7 +34,7 @@ class ClimatizationStatus(GenericStatus):
         if 'value' in fromDict:
             self.climatisationState.fromDict(fromDict['value'], 'climatisationState')
             if 'remainingClimatisationTime_min' in fromDict['value']:
-                remainingTime = int(fromDict['value']['remainingClimatisationTime_min'])
+                remainingTime = int(fromDict['value']['remainingClimatisationTimeInMinutes'])
                 if self.fixAPI and remainingTime != 0 and self.climatisationState.value == ClimatizationState.OFF:
                     remainingTime = 0
                     LOG.debug('%s: Attribute remainingClimatisationTime_min is %s while climatisationState is %s. Setting 0 instead',
@@ -47,7 +47,7 @@ class ClimatizationStatus(GenericStatus):
             self.climatisationState.enabled = False
 
         super().update(fromDict=fromDict, ignoreAttributes=(
-            ignoreAttributes + ['remainingClimatisationTime_min', 'climatisationState']))
+            ignoreAttributes + ['remainingClimatisationTimeInMinutes', 'climatisationState']))
 
     def __str__(self):
         string = super().__str__()

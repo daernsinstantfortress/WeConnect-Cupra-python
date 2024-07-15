@@ -19,9 +19,9 @@ class ClimatizationSettings(GenericSettings):
     ):
         self.targetTemperature_K = ChangeableAttribute(
             localAddress='targetTemperature_K', parent=self, value=None, valueType=float)
-        self.targetTemperature_C = AliasChangeableAttribute(localAddress='targetTemperature_C', parent=self, value=None,
+        self.targetTemperature_C = AliasChangeableAttribute(localAddress='targetTemperatureInCelsius', parent=self, value=None,
                                                             targetAttribute=self.targetTemperature_K, conversion=celsiusToKelvin, valueType=float)
-        self.targetTemperature_F = AliasChangeableAttribute(localAddress='targetTemperature_F', parent=self, value=None,
+        self.targetTemperature_F = AliasChangeableAttribute(localAddress='targetTemperatureInFahrenheit', parent=self, value=None,
                                                             targetAttribute=self.targetTemperature_K, conversion=farenheitToKelvin, valueType=float)
         self.unitInCar = AddressableAttribute(
             localAddress='unitInCar', parent=self, value=None, valueType=ClimatizationSettings.UnitInCar)
@@ -73,15 +73,15 @@ class ClimatizationSettings(GenericSettings):
         # Cupra
         if 'value' not in fromDict:
             fromDict['value'] = fromDict
-        if 'targetTemperature_C' not in fromDict['value']:
-            fromDict['value']['targetTemperature_C'] = kelvinToCelsius(fromDict['value']['targetTemperature_K'])
-        if 'targetTemperature_F' not in fromDict['value']:
-            fromDict['value']['targetTemperature_F'] = kelvinToFarenheit(fromDict['value']['targetTemperature_K'])
+        # if 'targetTemperature_C' not in fromDict['value']:
+        #     fromDict['value']['targetTemperature_C'] = kelvinToCelsius(fromDict['value']['targetTemperature_K'])
+        # if 'targetTemperature_F' not in fromDict['value']:
+        #     fromDict['value']['targetTemperature_F'] = kelvinToFarenheit(fromDict['value']['targetTemperature_K'])
 
         if 'value' in fromDict:
             self.targetTemperature_K.fromDict(fromDict['value'], 'targetTemperature_K')
-            self.targetTemperature_C.fromDict(fromDict['value'], 'targetTemperature_C')
-            self.targetTemperature_F.fromDict(fromDict['value'], 'targetTemperature_F')
+            self.targetTemperature_C.fromDict(fromDict['value'], 'targetTemperatureInCelsius')
+            self.targetTemperature_F.fromDict(fromDict['value'], 'targetTemperatureInFahrenheit')
             self.unitInCar.fromDict(fromDict['value'], 'unitInCar')
             self.climatisationWithoutExternalPower.fromDict(fromDict['value'], 'climatisationWithoutExternalPower')
             self.climatizationAtUnlock.fromDict(fromDict['value'], 'climatizationAtUnlock')
@@ -105,8 +105,8 @@ class ClimatizationSettings(GenericSettings):
 
         super().update(fromDict=fromDict, ignoreAttributes=(ignoreAttributes + [
             'targetTemperature_K',
-            'targetTemperature_C',
-            'targetTemperature_F',
+            'targetTemperatureInCelsius',
+            'targetTemperatureInFahrenheit',
             'unitInCar',
             'climatisationWithoutExternalPower',
             'climatizationAtUnlock',

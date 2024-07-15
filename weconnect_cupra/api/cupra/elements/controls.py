@@ -8,7 +8,7 @@ from weconnect_cupra.api.cupra.elements.charging_settings import ChargingSetting
 from weconnect_cupra.api.cupra.elements.climatization_settings import ClimatizationSettings
 from weconnect_cupra.elements.error import Error
 from weconnect_cupra.errors import ControlError, SetterError
-from weconnect_cupra.util import celsiusToKelvin, farenheitToKelvin
+from weconnect_cupra.util import celsiusToKelvin, farenheitToKelvin, farenheitToCelsius
 from weconnect_cupra.api.vw.domain import Domain
 
 LOG = logging.getLogger("weconnect_cupra")
@@ -64,25 +64,34 @@ class Controls(AddressableObject):
                 if 'climatisation' not in self.vehicle.domains and 'climatisationSettings' not in self.vehicle.domains['climatisation']:
                     raise ControlError('Could not control climatisation, there are no climatisationSettings for the vehicle available.')
                 climatizationSettings = self.vehicle.domains['climatisation']['climatisationSettings']
+
                 for child in climatizationSettings.getLeafChildren():
                     if isinstance(child, ChangeableAttribute):
                         settingsDict[child.getLocalAddress()] = child.value
+
                 if temperature is not None:
+                    settingsDict['targetTemperature'] = temperature
                     if 'targetTemperature_C' in settingsDict:
-                        settingsDict['targetTemperature_C'] = temperature
-                    settingsDict['targetTemperature_K'] = celsiusToKelvin(temperature)
-                elif 'targetTemperature_K' not in settingsDict:
-                    if 'targetTemperature_C' in settingsDict:
-                        settingsDict['targetTemperature_K'] = celsiusToKelvin(settingsDict['targetTemperature_C'])
+                        settingsDict['targetTemperatureUnit'] = 'celsius'
                     elif 'targetTemperature_F' in settingsDict:
-                        settingsDict['targetTemperature_K'] = farenheitToKelvin(settingsDict['targetTemperature_F'])
+                        settingsDict['targetTemperatureUnit'] = 'farenheit'
+
+                else: 
+                    if 'targetTemperature_C' in settingsDict:
+                        settingsDict['targetTemperature'] = settingsDict['targetTemperature_C']
+                        settingsDict['targetTemperatureUnit'] = 'celsius'
+                    elif 'targetTemperature_F' in settingsDict:
+                        settingsDict['targetTemperature'] = farenheitToCelsius(settingsDict['targetTemperature_F'])
+                        settingsDict['targetTemperatureUnit'] = 'farenheit'
                     else:
-                        settingsDict['targetTemperature_K'] = celsiusToKelvin(20.5)
+                        settingsDict['targetTemperature'] = celsiusToKelvin(20.5)
+                        settingsDict['targetTemperatureUnit'] = 'celsius'
+
 
             # Do API request to set temperature
             data = json.dumps(settingsDict)
             controlResponse = self.vehicle.fetcher.put(
-                url=f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vehicle.vin.value}/climatisation/requests/settings',
+                url=f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vehicle.vin.value}/climatisation/settings', #changed
                 data=data,
                 allow_redirects=True,
                 headers={
@@ -114,7 +123,7 @@ class Controls(AddressableObject):
 
         # Do API request to set run state
         controlResponse = self.vehicle.fetcher.post(
-            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vehicle.vin.value}/climatisation/requests/{control.value}',
+            url=f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vehicle.vin.value}/climatisation/requests/{control.value}',
             allow_redirects=True,
             headers={
                 "accept": '*/*',

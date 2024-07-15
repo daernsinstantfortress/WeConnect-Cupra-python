@@ -79,7 +79,10 @@ def celsiusToKelvin(value):
 
 
 def farenheitToKelvin(value):
-    return 273.5 + ((value - 32.0) * (5.0 / 9.0))
+    return 273.5 + farenheitToCelsius(value)
+
+def farenheitToCelsius(value):
+    return (value - 32.0) * (5.0 / 9.0)
 
 
 def kelvinToCelsius(value):

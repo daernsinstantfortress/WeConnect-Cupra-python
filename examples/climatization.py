@@ -12,11 +12,15 @@ def main():
         description='Example starting climatizaton')
     parser.add_argument('-u', '--username', help='Username of Volkswagen id', required=True)
     parser.add_argument('-p', '--password', help='Password of Volkswagen id', required=True)
+    parser.add_argument('-d', '--debug', help='Turn on debug logging', default=False, action='store_true')
     parser.add_argument('--service', help='Service to connect to. One of WeConnect, MyCupra', required=True)
     parser.add_argument('--vin', help='VIN of the vehicle to set climatization', required=True)
     parser.add_argument('--state', help='Climatization state. One of start, stop', required=False)
 
     args = parser.parse_args()
+
+    if args.debug:
+        logging.basicConfig(level=logging.INFO)
 
     # logging.basicConfig(level=logging.DEBUG)
 

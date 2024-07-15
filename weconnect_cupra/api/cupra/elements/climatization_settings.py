@@ -27,8 +27,8 @@ class ClimatizationSettings(GenericSettings):
             localAddress='unitInCar', parent=self, value=None, valueType=ClimatizationSettings.UnitInCar)
         self.climatisationWithoutExternalPower = ChangeableAttribute(
             localAddress='climatisationWithoutExternalPower', parent=self, value=None, valueType=bool)
-        self.climatizationAtUnlock = ChangeableAttribute(
-            localAddress='climatizationAtUnlock', parent=self, value=None, valueType=bool)
+        self.climatisationAtUnlock = ChangeableAttribute(
+            localAddress='climatisationAtUnlock', parent=self, value=None, valueType=bool)
         self.windowHeatingEnabled = ChangeableAttribute(
             localAddress='windowHeatingEnabled', parent=self, value=None, valueType=bool)
         self.zoneFrontLeftEnabled = ChangeableAttribute(
@@ -47,7 +47,7 @@ class ClimatizationSettings(GenericSettings):
         self.climatisationWithoutExternalPower.addObserver(
             self.valueChanged, AddressableLeaf.ObserverEvent.VALUE_CHANGED,
             priority=AddressableLeaf.ObserverPriority.INTERNAL_MID)
-        self.climatizationAtUnlock.addObserver(
+        self.climatisationAtUnlock.addObserver(
             self.valueChanged, AddressableLeaf.ObserverEvent.VALUE_CHANGED,
             priority=AddressableLeaf.ObserverPriority.INTERNAL_MID)
         self.windowHeatingEnabled.addObserver(
@@ -84,7 +84,7 @@ class ClimatizationSettings(GenericSettings):
             self.targetTemperature_F.fromDict(fromDict['value'], 'targetTemperatureInFahrenheit')
             self.unitInCar.fromDict(fromDict['value'], 'unitInCar')
             self.climatisationWithoutExternalPower.fromDict(fromDict['value'], 'climatisationWithoutExternalPower')
-            self.climatizationAtUnlock.fromDict(fromDict['value'], 'climatizationAtUnlock')
+            self.climatisationAtUnlock.fromDict(fromDict['value'], 'climatisationAtUnlock')
             self.windowHeatingEnabled.fromDict(fromDict['value'], 'windowHeatingEnabled')
             self.zoneFrontLeftEnabled.fromDict(fromDict['value'], 'zoneFrontLeftEnabled')
             self.zoneFrontRightEnabled.fromDict(fromDict['value'], 'zoneFrontRightEnabled')
@@ -96,7 +96,7 @@ class ClimatizationSettings(GenericSettings):
             self.targetTemperature_F.enabled = False
             self.unitInCar.enabled = False
             self.climatisationWithoutExternalPower.enabled = False
-            self.climatizationAtUnlock.enabled = False
+            self.climatisationAtUnlock.enabled = False
             self.windowHeatingEnabled.enabled = False
             self.zoneFrontLeftEnabled.enabled = False
             self.zoneFrontRightEnabled.enabled = False
@@ -109,7 +109,7 @@ class ClimatizationSettings(GenericSettings):
             'targetTemperatureInFahrenheit',
             'unitInCar',
             'climatisationWithoutExternalPower',
-            'climatizationAtUnlock',
+            'climatisationAtUnlock',
             'windowHeatingEnabled',
             'zoneFrontLeftEnabled',
             'zoneFrontRightEnabled',
@@ -128,8 +128,8 @@ class ClimatizationSettings(GenericSettings):
             string += f'\n\tTemperature unit in car: {self.unitInCar.value.value}'
         if self.climatisationWithoutExternalPower.enabled:
             string += f'\n\tClimatization without external Power: {self.climatisationWithoutExternalPower.value}'
-        if self.climatizationAtUnlock.enabled:
-            string += f'\n\tStart climatization after unlock: {self.climatizationAtUnlock.value}'
+        if self.climatisationAtUnlock.enabled:
+            string += f'\n\tStart climatization after unlock: {self.climatisationAtUnlock.value}'
         if self.windowHeatingEnabled.enabled:
             string += f'\n\tWindow heating: {self.windowHeatingEnabled.value}'
         if self.zoneFrontLeftEnabled.enabled:

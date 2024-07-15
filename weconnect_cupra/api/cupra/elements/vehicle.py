@@ -214,13 +214,13 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
             raise APIError('VIN value is not set')
 
         charging_settings_dict = self.fetcher.fetchData(
-            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/charging/settings')['settings']
+            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/charging/settings')['settings'] #same
         charging_status_dict = self.fetcher.fetchData(
-            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/charging/status')['status']
+            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/charging/status')['status'] # same
         climatization_status_dict = self.fetcher.fetchData(
-            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/climatisation/status')["data"]
+            f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/climatisation/status') # changed
         climatization_settings_dict = self.fetcher.fetchData(
-            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/climatisation/settings')['settings']
+            f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vin.value}/climatisation/settings') # changed
         connection_dict = self.fetcher.fetchData(
             f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/connection')['connection']
 
@@ -268,7 +268,7 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
         if 'state' in self.capabilities and not self.capabilities['state'].status.value:
             try:
                 mileage_dict = self.fetcher.fetchData(
-                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/mileage')
+                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/mileage') 
                 
                 self.assign_properties_to_domain(
                     klass=OdometerMeasurement,
@@ -277,7 +277,7 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
                     settings_key='odometerStatus')
 
                 status_dict = self.fetcher.fetchData(
-                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vin.value}/status')
+                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vin.value}/status') #same
 
                 self.assign_properties_to_domain(
                     klass=AccessStatus,

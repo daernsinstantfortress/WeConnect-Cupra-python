@@ -18,7 +18,7 @@ class ClimatizationStatus(GenericStatus):
         fixAPI=True,
     ):
         self.remainingClimatisationTime_min = AddressableAttribute(
-            localAddress='remainingClimatisationTime_min', parent=self, value=None, valueType=int)
+            localAddress='remainingClimatisationTimeInMinutes', parent=self, value=None, valueType=int)
         self.climatisationState = AddressableAttribute(localAddress='climatisationState', value=None, parent=self,
                                                        valueType=ClimatizationState)
         super().__init__(vehicle=vehicle, parent=parent, statusId=statusId, fromDict=fromDict, fixAPI=fixAPI)
@@ -33,12 +33,12 @@ class ClimatizationStatus(GenericStatus):
 
         if 'value' in fromDict:
             self.climatisationState.fromDict(fromDict['value'], 'climatisationState')
-            if 'remainingClimatisationTime_min' in fromDict['value']:
+            if 'remainingClimatisationTimeInMinutes' in fromDict['value']:
                 remainingTime = int(fromDict['value']['remainingClimatisationTimeInMinutes'])
                 if self.fixAPI and remainingTime != 0 and self.climatisationState.value == ClimatizationState.OFF:
                     remainingTime = 0
-                    LOG.debug('%s: Attribute remainingClimatisationTime_min is %s while climatisationState is %s. Setting 0 instead',
-                              self.getGlobalAddress(), fromDict['value']['remainingClimatisationTime_min'], self.climatisationState.value)
+                    LOG.debug('%s: Attribute remainingClimatisationTimeInMinutes is %s while climatisationState is %s. Setting 0 instead',
+                              self.getGlobalAddress(), fromDict['value']['remainingClimatisationTimeInMinutes'], self.climatisationState.value)
                 self.remainingClimatisationTime_min.setValueWithCarTime(remainingTime, lastUpdateFromCar=None, fromServer=True)
             else:
                 self.remainingClimatisationTime_min.enabled = False

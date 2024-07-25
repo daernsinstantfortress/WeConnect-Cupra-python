@@ -179,7 +179,7 @@ class OpenIDSession(requests.Session):
             timeout = self.timeout
 
         return super(OpenIDSession, self).request(
-            method, url, headers=headers, data=data, **kwargs
+            method, url, headers=headers, data=data, timeout=timeout, **kwargs
         )
 
     def addToken(self, uri, body=None, headers=None, access_type=AccessType.ACCESS, token=None, **kwargs):

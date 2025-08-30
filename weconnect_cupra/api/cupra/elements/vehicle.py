@@ -156,24 +156,30 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
 
             # Update capabilities
             if updateCapabilities:
-                capabilities_dict = self.fetcher.fetchData(
-                    f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/capabilities')
-                if 'capabilities' in capabilities_dict and capabilities_dict['capabilities'] is not None:
-                    for capDict in capabilities_dict['capabilities']:
-                        if 'id' in capDict:
-                            if capDict['id'] in self.capabilities:
-                                self.capabilities[capDict['id']].update(fromDict=capDict)
-                            else:
-                                self.capabilities[capDict['id']] = GenericCapability(
-                                    capabilityId=capDict['id'],
-                                    parent=self.capabilities,
-                                    fromDict=capDict,
-                                    fixAPI=self.fixAPI)
-                    for capabilityId in [capabilityId for capabilityId in self.capabilities.keys()
-                            if capabilityId not in [capability['id']
-                            for capability in capabilities_dict['capabilities'] if 'id' in capability]]:
-                        del self.capabilities[capabilityId]
-                else:
+                try:
+                    capabilities_dict = self.fetcher.fetchData(
+                        f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/user/{self.fetcher.user_id}/vehicle/{self.vin.value}/capabilities')
+                    if capabilities_dict and 'capabilities' in capabilities_dict and capabilities_dict['capabilities'] is not None:
+                        for capDict in capabilities_dict['capabilities']:
+                            if 'id' in capDict:
+                                if capDict['id'] in self.capabilities:
+                                    self.capabilities[capDict['id']].update(fromDict=capDict)
+                                else:
+                                    self.capabilities[capDict['id']] = GenericCapability(
+                                        capabilityId=capDict['id'],
+                                        parent=self.capabilities,
+                                        fromDict=capDict,
+                                        fixAPI=self.fixAPI)
+                        for capabilityId in [capabilityId for capabilityId in self.capabilities.keys()
+                                if capabilityId not in [capability['id']
+                                for capability in capabilities_dict['capabilities'] if 'id' in capability]]:
+                            del self.capabilities[capabilityId]
+                    else:
+                        self.capabilities.clear()
+                        self.capabilities.enabled = False
+                except Exception as e:
+                    LOG.warning('Failed to fetch capabilities for VIN %s: %s', self.vin.value, e)
+                    LOG.warning('Capabilities endpoint may have changed or is unavailable, continuing without capabilities')
                     self.capabilities.clear()
                     self.capabilities.enabled = False
 

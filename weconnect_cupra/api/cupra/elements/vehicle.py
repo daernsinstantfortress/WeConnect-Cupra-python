@@ -158,7 +158,7 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
             if updateCapabilities:
                 try:
                     capabilities_dict = self.fetcher.fetchData(
-                        f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/capabilities')
+                        f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/user/{self.fetcher.user_id}/vehicle/{self.vin.value}/capabilities')
                     if capabilities_dict and 'capabilities' in capabilities_dict and capabilities_dict['capabilities'] is not None:
                         for capDict in capabilities_dict['capabilities']:
                             if 'id' in capDict:

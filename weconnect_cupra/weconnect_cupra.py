@@ -53,8 +53,8 @@ class WeConnect(AddressableObject):  # pylint: disable=too-many-instance-attribu
             Defaults to True.
             loginOnInit (bool, optional): Login after initialization (If set to false, login needs to be called manually). Defaults to True.
             fixAPI (bool, optional): Automatically fix known issues with the WeConnect responses. Defaults to True.
-            maxAge (int, optional): Maximum age of the cache before date is fetched again. None means no caching. Defaults to None.
-            maxAgePictures (Optional[int], optional):  Maximum age of the pictures in the cache before date is fetched again. None means no caching.
+            maxAge (int, optional): Maximum age in seconds of the cache before date is fetched again. None means no caching. Defaults to None.
+            maxAgePictures (Optional[int], optional):  Maximum age in seconds of the pictures in the cache before date is fetched again. None means no caching.
             Defaults to None.
             updateCapabilities (bool, optional): Also update the information about the cars capabilities. Defaults to True.
             updatePictures (bool, optional):  Also fetch and update pictures. Defaults to True.

@@ -227,8 +227,6 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
             f'https://ola.prod.code.seat.cloud.vwgroup.com/v1/vehicles/{self.vin.value}/climatisation/status') # changed
         climatization_settings_dict = self.fetcher.fetchData(
             f'https://ola.prod.code.seat.cloud.vwgroup.com/v2/vehicles/{self.vin.value}/climatisation/settings') # changed
-        connection_dict = self.fetcher.fetchData(
-            f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/connection')['connection']
 
 
         jobs = {
@@ -242,9 +240,6 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
                 'climatisationStatus': (ClimatizationStatus, climatization_status_dict['climatisationStatus']),
                 'windowHeatingStatus': (WindowHeatingStatus, climatization_status_dict['windowHeatingStatus']),
                 'climatisationSettings': (ClimatizationSettings, climatization_settings_dict)
-            },
-            Domain.STATUS: {
-                'connectionStatus': (ConnectionStatus, connection_dict)
             }
           
         }
@@ -293,6 +288,20 @@ class Vehicle(AddressableObject):  # pylint: disable=too-many-instance-attribute
 
             except:
                 LOG.warn('Failed to get vehicle status')
+
+        try:
+            connection_dict = self.fetcher.fetchData(
+                f'https://ola.prod.code.seat.cloud.vwgroup.com/vehicles/{self.vin.value}/connection')['connection']
+
+            self.assign_properties_to_domain(
+                klass=ConnectionStatus,
+                properties=connection_dict,
+                domain_value=Domain.STATUS.value,
+                settings_key='connectionStatus')
+
+        except:
+            LOG.debug('Failed to get connection status')
+
 
         # Controls
         self.controls.update()
